@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <script src="https://kit.fontawesome.com/78474c3286.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+
+    <section>
+        <!-- Container for TODO App View -->
+        <div class="container">
+            <h1>TODO App</h1>
+            <!-- Hendle to Add Task form -->
+            <form action="/create-task" method="POST">
+                <div class="description_box">
+                    <label for="description">DESCRIPTION</label>
+                    <br>
+                    <input type="text" name="description" id="" placeholder="What do you do?" required>
+                </div>
+                <div class="category_date_box">
+                    <div class="category_box">
+                        <label for="category">CATEGORY</label>
+                        <br>
+                        <select name="category" class="category_select" required>
+                        <option value="">Choose a category</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Work">Work</option>
+                        <option value="School">School</option>
+                        <option value="Cleaning">Cleaning</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    </div>
+                    <div class="date_box">
+                        <label for="date">DUE DATE</label>
+                        <br>
+                        <input type="date" name="date" class="due_date">
+                    </div>
+                </div>
+                <button class="button_add" type="submit " id="add "><i class="fas fa-plus "></i>&nbsp;&nbsp;ADD TASK</button>
+            </form>
+
+            <!-- Hendle to Delete Tasks -->
+            <form action="/delete-task" method="GET">
+                <button class="button_delete" type="submit "><i class="fas fa-trash-alt "></i>&nbsp;&nbsp;DELETE TASK</button>
+
+                <!-- Table for show my TODO lists -->
+                <table class="todo_show">
+                    <% for(let i of task) { %>
+                        <tr>
+                            <td colspan="1" class="table_data"><input type="checkbox" name="<%= i._id %>"></td>
+                            <td colspan="10">
+                                <p id="task-description">
+                                    <%= i.description %>
+                                </p>
+                                <i class="far fa-calendar-alt"></i>
+                                <span id="due-date"><%= i.date %></span>
+                            </td>
+                            <td colspan="1" class="table_data">
+                                <p id="task-category" class="<%= i.category %> category">
+                                    <%= i.category %>
+                                </p>
+                            </td>
+                        </tr>
+                        <% } %>
+                </table>
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>
